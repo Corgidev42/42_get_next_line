@@ -6,7 +6,7 @@
 /*   By: dev <dev@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:32:46 by dev               #+#    #+#             */
-/*   Updated: 2024/12/09 14:28:38 by dev              ###   ########.fr       */
+/*   Updated: 2024/12/10 12:40:46 by dev              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,22 @@ static char	*get_line(char **saved)
 	return (line);
 }
 
+char	*read_error(char **saved, ssize_t bytes_read)
+{
+	char *temp;
+
+	if (*saved && **saved && bytes_read == 0)
+	{
+		temp = ft_strdup(*saved);
+		free(*saved);
+		*saved = NULL;
+		return (temp);
+	}
+	free(*saved);
+	*saved = NULL;
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*saved = NULL;
@@ -86,7 +102,7 @@ char	*get_next_line(int fd)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read <= 0)
-			break ;
+			return (read_error(&saved, bytes_read));
 		buffer[bytes_read] = '\0';
 		if (!saved)
 			saved = ft_strdup(buffer);
