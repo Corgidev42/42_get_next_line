@@ -6,7 +6,7 @@
 /*   By: dev <dev@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:32:46 by dev               #+#    #+#             */
-/*   Updated: 2024/12/10 12:40:46 by dev              ###   ########.fr       */
+/*   Updated: 2024/12/10 16:37:26 by dev              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static char	*get_line(char **saved)
 	{
 		len = ft_strchr(*saved, '\n') - *saved + 1;
 		line = ft_substr(*saved, 0, len);
+		if (!line)
+			return (free(*saved), *saved = NULL, NULL);
 		temp = ft_strdup(*saved + len);
 	}
 	else
