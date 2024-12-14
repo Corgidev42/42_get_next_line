@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dev <dev@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vbonnard <vbonnard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:32:46 by dev               #+#    #+#             */
-/*   Updated: 2024/12/12 19:58:33 by dev              ###   ########.fr       */
+/*   Updated: 2024/12/14 15:21:18 by vbonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,49 +99,20 @@ char	*get_next_line(int fd)
 	char		*temp;
 	ssize_t		bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !(buffer = malloc((BUFFER_SIZE + 1)
-				* sizeof(char))))
-		return (NULL);
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (fd < 0 || BUFFER_SIZE <= 0 || !buffer)
+		return (read_error(&saved, 0, buffer));
 	while (!saved || !ft_strchr(saved, '\n'))
 	{
-		if ((bytes_read = read(fd, buffer, BUFFER_SIZE)) <= 0)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read <= 0)
 			return (read_error(&saved, bytes_read, buffer));
 		buffer[bytes_read] = '\0';
 		if (!saved)
-			saved = ft_strdup(buffer);
-		else
-		{
-			temp = ft_strjoin(saved, buffer);
-			free(saved);
-			saved = temp;
-		}
-		if (!saved)
-			return (free(buffer), NULL);
+			saved = ft_strdup("\0");
+		temp = ft_strjoin(saved, buffer);
+		free(saved);
+		saved = temp;
 	}
 	return (free(buffer), get_line(&saved));
 }
-
-/* int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-
-	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-		return (1);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		return (1);
-	}
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
-} */

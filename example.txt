@@ -1,5 +1,0 @@
-Bonjour, ceci est un test.
-Voici une deuxième ligne.
-Et une troisième ligne.
-La quatrième ligne est ici.
-Enfin, la cinquième ligne.
