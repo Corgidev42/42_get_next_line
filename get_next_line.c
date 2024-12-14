@@ -6,7 +6,7 @@
 /*   By: dev <dev@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:32:46 by dev               #+#    #+#             */
-/*   Updated: 2024/12/10 16:37:26 by dev              ###   ########.fr       */
+/*   Updated: 2024/12/12 19:58:33 by dev              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ static char	*get_line(char **saved)
 	return (line);
 }
 
-char	*read_error(char **saved, ssize_t bytes_read)
+char	*read_error(char **saved, ssize_t bytes_read, char *buffer)
 {
-	char *temp;
+	char	*temp;
 
+	free(buffer);
 	if (*saved && **saved && bytes_read == 0)
 	{
 		temp = ft_strdup(*saved);
@@ -94,17 +95,17 @@ char	*read_error(char **saved, ssize_t bytes_read)
 char	*get_next_line(int fd)
 {
 	static char	*saved = NULL;
-	char		buffer[BUFFER_SIZE + 1];
+	char		*buffer;
 	char		*temp;
 	ssize_t		bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || !(buffer = malloc((BUFFER_SIZE + 1)
+				* sizeof(char))))
 		return (NULL);
 	while (!saved || !ft_strchr(saved, '\n'))
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read <= 0)
-			return (read_error(&saved, bytes_read));
+		if ((bytes_read = read(fd, buffer, BUFFER_SIZE)) <= 0)
+			return (read_error(&saved, bytes_read, buffer));
 		buffer[bytes_read] = '\0';
 		if (!saved)
 			saved = ft_strdup(buffer);
@@ -115,9 +116,9 @@ char	*get_next_line(int fd)
 			saved = temp;
 		}
 		if (!saved)
-			return (NULL);
+			return (free(buffer), NULL);
 	}
-	return (get_line(&saved));
+	return (free(buffer), get_line(&saved));
 }
 
 /* int	main(int argc, char **argv)
