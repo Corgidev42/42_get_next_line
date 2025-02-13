@@ -6,7 +6,7 @@
 /*   By: vbonnard <vbonnard@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:32:45 by dev               #+#    #+#             */
-/*   Updated: 2025/02/13 11:08:20 by vbonnard         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:52:25 by vbonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,28 @@ size_t		ft_strlen(const char *s);
  * @brief Trouve la première occurrence du caractère c dans la chaîne s.
  *
 
-	* Cette fonction recherche la première occurrence du caractère c (converti en char)
+	* Cette fonction recherche la première
+		occurrence du caractère c (converti en char)
 
-	* dans la chaîne pointée par s. Le caractère nul de fin est inclus dans la recherche.
+	* dans la chaîne pointée par s.
+		Le caractère nul de fin est inclus dans la recherche.
  *
  * @param s La chaîne de caractères dans laquelle chercher.
  * @param c Le caractère à trouver.
 
-	* @return Un pointeur sur la première occurrence du caractère c dans la chaîne s,
- * ou NULL si le caractère n'est pas trouvé.
+	* @return Un pointeur sur la première
+		occurrence du caractère c dans la chaîne s,
+ * 			ou NULL si le caractère n'est pas trouvé.
  */
 char		*ft_strchr(const char *s, int c);
 
 /**
  * @brief Duplique une chaîne de caractères.
  *
-
-	* Cette fonction alloue suffisamment de mémoire pour copier la chaîne de caractères
- * passée en argument,
-	puis copie cette chaîne dans la nouvelle zone de mémoire allouée.
+	* Cette fonction alloue suffisamment
+		de mémoire pour copier la chaîne de caractères
+ 			passée en argument,
+				puis copie cette chaîne dans la nouvelle zone de mémoire allouée.
  *
  * @param s1 La chaîne de caractères à dupliquer.
  * @return Un pointeur vers la nouvelle chaîne de caractères dupliquée,
@@ -82,9 +85,9 @@ char		*ft_strjoin(char const *s1, char const *s2);
  * @brief Extrait une sous-chaîne d'une chaîne donnée.
  *
  * Cette fonction alloue (avec malloc) et retourne une nouvelle chaîne,
-
-	* qui est une copie de la partie de la chaîne 's' qui commence à l'index 'start'
- * et qui a une longueur maximale de 'len' caractères.
+	qui est une copie de la partie de la
+		chaîne 's' qui commence à l'index 'start'
+ 			et qui a une longueur maximale de 'len' caractères.
  *
  * @param s La chaîne de caractères source.
  * @param start L'index de début de la sous-chaîne dans la chaîne source.
@@ -99,7 +102,8 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
  * Cette fonction copie jusqu'à dstsize
 	- 1 caractères de la chaîne src vers dst,
 
-	* en terminant par un caractère nul ('\0'). Si la longueur de src est supérieure
+	* en terminant par un caractère nul ('\0').
+		Si la longueur de src est supérieure
  * ou égale à dstsize, la chaîne résultante dans dst ne sera pas terminée par un
  * caractère nul.
  *
@@ -113,8 +117,9 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 /**
 
-	* @brief Concatène deux chaînes de caractères en s'assurant que la taille totale
- *        de la chaîne résultante ne dépasse pas dstsize.
+	* @brief Concatène deux chaînes de
+		caractères en s'assurant que la taille totale
+ *			de la chaîne résultante ne dépasse pas dstsize.
  *
  * @param dst La chaîne de destination où src sera concaténée.
  * @param src La chaîne source à concaténer à dst.
@@ -146,22 +151,25 @@ static char	*get_line(char **saved);
  * @brief Lit une ligne depuis un descripteur de fichier.
  *
  * Cette fonction lit une ligne complète depuis le descripteur de fichier donné.
-
-	* Elle utilise un tampon statique pour stocker les données lues entre les appels.
+	* Elle utilise un tampon statique pour
+		stocker les données lues entre les appels.
  *
  * @param fd Le descripteur de fichier à lire.
  * @return Un pointeur vers la ligne lue,
 	ou NULL en cas d'erreur ou de fin de fichier.
  *
 
-	* La fonction alloue dynamiquement de la mémoire pour la ligne retournée. Il est de la
- * responsabilité de l'appelant de libérer cette mémoire après utilisation.
+	* La fonction alloue dynamiquement de la mémoire
+		pour la ligne retournée. Il est de la
+ 			responsabilité de l'appelant de
+				libérer cette mémoire après utilisation.
  *
 
-	* La fonction utilise un tampon de taille BUFFER_SIZE pour lire les données du fichier.
- * Si BUFFER_SIZE est inférieur ou égal à 0,
-	ou si une erreur de lecture se produit,
- * la fonction retourne NULL.
+	* La fonction utilise un tampon de taille
+		BUFFER_SIZE pour lire les données du fichier.
+			Si BUFFER_SIZE est inférieur ou égal à 0,
+				ou si une erreur de lecture se produit,
+					la fonction retourne NULL.
  *
  * La fonction utilise les fonctions auxiliaires suivantes :
  * - read_error() : Gère les erreurs de lecture et libère les ressources.
@@ -181,12 +189,15 @@ char		*get_next_line(int fd);
  * si des données ont été lues avec succès.
  *
 
-	* @param saved Un pointeur vers la chaîne sauvegardée contenant les données lues précédemment.
+	* @param saved Un pointeur vers la chaîne
+		sauvegardée contenant les données lues précédemment.
 
-	* @param bytes_read Le nombre d'octets lus lors de la dernière opération de lecture.
+	* @param bytes_read Le nombre d'octets
+		lus lors de la dernière opération de lecture.
  * @param buffer Le tampon de lecture à libérer.
 
-	* @return Une copie de la chaîne sauvegardée si des données ont été lues avec succès,
+	* @return Une copie de la chaîne sauvegardée 
+		si des données ont été lues avec succès,
  *         NULL sinon.
  */
 char		*read_error(char **saved, ssize_t bytes_read, char *buffer);
