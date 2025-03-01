@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbonnard <vbonnard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vbonnard <vbonnard@student.42perpignan.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:32:46 by dev               #+#    #+#             */
 /*   Updated: 2024/12/14 15:26:11 by vbonnard         ###   ########.fr       */
